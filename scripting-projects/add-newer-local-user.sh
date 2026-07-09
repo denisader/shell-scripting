@@ -2,14 +2,14 @@
 
 if [[ ${UID} -ne 0 ]]
 then
-    echo "Please run with sudo or as root."
+    echo "Please run with sudo or as root." >&2
     exit 1
 fi
 
 if [[ ${#} -lt 1 ]] # sudo ./add.sh USERNAME [COMMENT]
 then
-    echo "Usage: sudo ./add-new-local-user.sh USER_NAME [COMMENT]"
-    echo "Create an account on the local system with the name of USER_NAME and a comments field of COMMENT."
+    echo "Usage: sudo ./add-newer-local-user.sh USER_NAME [COMMENT]" >&2
+    echo "Create an account on the local system with the name of USER_NAME and a comments field of COMMENT." >&2
     exit 1
 fi
 
@@ -21,7 +21,7 @@ useradd -c "${COMMENT}" -m $USERNAME
 
 if [[ ${?} -ne 0 ]]
 then
-    echo "Useradd command did not succeed."
+    echo "Useradd command did not succeed." >&2
     exit 1
 fi
 
@@ -33,7 +33,7 @@ echo ${PASSWORD} | passwd --stdin ${USERNAME}
 
 if [[ ${?} -ne 0 ]]
 then 
-    echo "Passwd command did not succeed."
+    echo "Passwd command did not succeed.">&2
     exit 1
 fi
 
